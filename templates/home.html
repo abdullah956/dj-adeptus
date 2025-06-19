@@ -605,6 +605,7 @@
                   <option value="">Select Type</option>
                   <option value="training">Training Certificate</option>
                   <option value="equipment">Equipment Certificate</option>
+                  <option value="lifting">Lifting Gear Certificate</option> <!-- fixed -->
                 </select>
               </div>
               <div class="col-md-1">
@@ -1090,6 +1091,19 @@
                 <tr><th>Location</th><td>${cert.location}</td></tr>
                 <tr><th>Comments</th><td>${cert.comments}</td></tr>
               `;
+            } else if (certType === 'lifting') {
+              html += `
+                <tr><th>Item Name</th><td>${cert.item_name}</td></tr>
+                <tr><th>Date of Inspection</th><td>${cert.lifting_inspection_date}</td></tr>
+                <tr><th>Date of Next Inspection</th><td>${cert.lifting_next_inspection}</td></tr>
+                <tr><th>Serial No</th><td>${cert.serial_no}</td></tr>
+                <tr><th>Manufacturer</th><td>${cert.manufacturer}</td></tr>
+                <tr><th>Length</th><td>${cert.length}</td></tr>
+                <tr><th>SWL</th><td>${cert.swl}</td></tr>
+                <tr><th>Standard Ref</th><td>${cert.standard_ref}</td></tr>
+                <tr><th>Remarks</th><td>${cert.lifting_remarks}</td></tr>
+                <tr><th>Inspector</th><td>${cert.inspector}</td></tr>
+              `;
             }
     
             html += '</table>';
@@ -1102,6 +1116,7 @@
         });
       });
     </script>
+    
     
 
   </body>

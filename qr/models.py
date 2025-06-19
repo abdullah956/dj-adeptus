@@ -18,3 +18,15 @@ class Certificate(models.Model):
     next_inspection_date = models.DateField(blank=True, null=True)
     location = models.CharField(max_length=100, blank=True, null=True)
     comments = models.TextField(blank=True, null=True)
+
+    # Lifting gear certificate fields
+    item_name = models.CharField(max_length=100, blank=True, null=True)
+    lifting_inspection_date = models.DateField(blank=True, null=True)
+    lifting_next_inspection = models.DateField(blank=True, null=True)
+    serial_no = models.CharField(max_length=100, blank=True, null=True)
+    manufacturer = models.CharField(max_length=100, blank=True, null=True)
+    length = models.CharField(max_length=50, blank=True, null=True)
+    swl = models.CharField(max_length=50, blank=True, null=True)
+    standard_ref = models.CharField(max_length=100, blank=True, null=True)
+    lifting_remarks = models.TextField(blank=True, null=True)
+    inspector = models.CharField(max_length=100, blank=True, null=True)
