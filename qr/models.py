@@ -1,12 +1,6 @@
 from django.db import models
 
 class Certificate(models.Model):
-    CERTIFICATE_TYPES = [
-        ('training', 'Training Certificate'),
-        ('equipment', 'Equipment Certificate'),
-    ]
-
-    certificate_type = models.CharField(max_length=20, choices=CERTIFICATE_TYPES)
     name = models.CharField(max_length=100)
     certificate_number = models.CharField(max_length=50)
 
