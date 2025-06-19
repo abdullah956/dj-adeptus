@@ -594,47 +594,56 @@
     <div class="container py-5">
       <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
-          <form>
-            <div class="row g-2">
-              <div class="col-md-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Enter Your Certificate Number"
-                  style="
-                    height: 40px;
-                    background-color: white;
-                    border: 1px solid rgb(223, 223, 223);
-                  "
-                />
-              </div>
-              <div class="col-md-7">
-                <select class="form-select">
-                  <option selected>Select Type</option>
-                  <option>Training Certificate</option>
-                  <option>Equipment Certificate</option>
-                  <option>Lifting Gear Certificate</option>
-                </select>
-              </div>
-              <div class="col-md-1">
-                <button type="submit" class="">Submit</button>
-              </div>
-            </div>
+          <form method="get" action="{% url 'verify_certificate' %}">
 
-            <!-- Error Message -->
-            <div class="error-box mt-0">Invalid certificate number</div>
+  <div class="row g-2">
+    <div class="col-md-4">
+      <input type="text" name="certificate_number" class="form-control" placeholder="Enter Your Certificate Number"
+        style="height: 40px; background-color: white; border: 1px solid rgb(223, 223, 223);" />
+    </div>
+    <div class="col-md-7">
+      <select name="certificate_type" class="form-select">
+        <option>Select Type</option>
+        <option value="training">Training Certificate</option>
+        <option value="equipment">Equipment Certificate</option>
+        <option value="lifting">Lifting Gear Certificate</option>
+      </select>
+    </div>
+    <div class="col-md-1">
+      <button type="submit">Submit</button>
+    </div>
+  </div>
+</form>
 
-            <!-- Additional Info -->
-            <p class="mt-3">
-              If the certificate you are verifying does not appear here. Please
-              <a href="" class="text-decoration-none">email us</a> the
-              certificate details
-            </p>
-          </form>
         </div>
       </div>
     </div>
 
+{% if error %}
+  <div class="error-box mt-0">{{ error }}</div>
+{% endif %}
+
+{% if certificate %}
+  <table class="table mt-3">
+    <tr><th>Name</th><td>{{ certificate.name }}</td></tr>
+    <tr><th>Certificate Number</th><td>{{ certificate.certificate_number }}</td></tr>
+
+    {% if type == 'training' %}
+      <tr><th>Registration Number</th><td>{{ certificate.registration_number }}</td></tr>
+      <tr><th>Card Number</th><td>{{ certificate.card_number }}</td></tr>
+      <tr><th>Course</th><td>{{ certificate.course }}</td></tr>
+      <tr><th>Issue Date</th><td>{{ certificate.issue_date }}</td></tr>
+      <tr><th>Renewal Date</th><td>{{ certificate.renewal_date }}</td></tr>
+    {% elif type == 'equipment' %}
+      <tr><th>Sticker No</th><td>{{ certificate.sticker_no }}</td></tr>
+      <tr><th>Equipment ID</th><td>{{ certificate.equipment_id }}</td></tr>
+      <tr><th>Inspection Date</th><td>{{ certificate.inspection_date }}</td></tr>
+      <tr><th>Next Inspection Date</th><td>{{ certificate.next_inspection_date }}</td></tr>
+      <tr><th>Location</th><td>{{ certificate.location }}</td></tr>
+      <tr><th>Comments</th><td>{{ certificate.comments }}</td></tr>
+    {% endif %}
+  </table>
+{% endif %}
     <div class="container py-5 mt-3">
       <div
         class="consultation-banner d-flex flex-column flex-md-row justify-content-between align-items-center"
