@@ -566,7 +566,7 @@
     </div>
 
     <div class="container section-container mt-5">
-      <div class="row align-items-center">
+      <div class="row align-items-center mx-auto" style="width: 95%;">
         <div class="col-md-6 text-content">
           <span class=""
             ><img
@@ -605,7 +605,7 @@
                   <option value="">Select Type</option>
                   <option value="training">Training Certificate</option>
                   <option value="equipment">Equipment Certificate</option>
-                  <option value="lifting">Lifting Gear Certificate</option> <!-- fixed -->
+                  <option value="lifting">Lifting Gear Certificate</option> 
                 </select>
               </div>
               <div class="col-md-1">
@@ -613,9 +613,21 @@
               </div>
             </div>
           </form>
+
+          <div id="alert-container">
+  <div style="width: 100%; margin: 0 auto; background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; padding: 0.80rem 1.25rem; border-radius: 0.25rem;">
+    Invalid certificate number.
+  </div>
+  <p class="mt-2">
+    If the certificate you are verifying does not appear here, please
+    <a href="#" class="text-decoration-none">email</a> us the certificate details.
+  </p>
+</div>
+
+
           
 
-<div id="result-box" class="mt-4"></div>
+          <div id="result-box" class="mt-4"></div>
 
 
         </div>
@@ -1051,73 +1063,221 @@
     </div>
 
 
+    <style>
+      .custom-table {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.custom-table th,
+.custom-table td {
+  border-bottom: 1px solid #000000;
+  padding: 5px 10px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.custom-table tr:nth-child(odd) {
+  background-color: #f3f3f3;
+}
+
+
+
+.custom-table th {
+  /* background-color: #f1f1f1; */
+  /* width: 200px; */
+  border-right: none !important;
+}
+
+/* Remove vertical border between th and td */
+.no-middle-border th,
+.no-middle-border td {
+  border-right: none !important;
+}
+
+/* Header Box */
+.heading-box {
+  background-color: #8cc63f;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid black;
+  
+}
+
+/* Wrap for training/equipment */
+.certificate-box {
+  border: 1px solid #000000;
+  width: 70%;
+  margin: 0 auto 20px auto;
+  border-top: none;
+  margin-top: 20px;
+}
+
+/* Lifting Table */
+.custom-lifting-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin-top: 10px;
+}
+
+.custom-lifting-table th,
+.custom-lifting-table td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: center;
+}
+
+.custom-lifting-table th {
+  background-color: #ffffff;
+}
+
+ 
+
+    </style>
+
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+    
     <script>
-      $('#verify-form').on('submit', function(e) {
-        e.preventDefault();
-    
-        const certType = $('#certificate-type-select').val();
-        const certNumber = $('input[name="certificate_number"]').val();
-    
-        $.ajax({
-          url: "{% url 'verify_certificate' %}",
-          method: "GET",
-          data: { certificate_number: certNumber },
-          headers: { "X-Requested-With": "XMLHttpRequest" },
-          success: function(response) {
-            const cert = response.certificate;
-            let html = `
-              <table class="table mt-3">
-                <tr><th>Name</th><td>${cert.name}</td></tr>
-                <tr><th>Certificate Number</th><td>${cert.certificate_number}</td></tr>
+  $('#verify-form').on('submit', function(e) {
+    e.preventDefault();
+
+    const certType = $('#certificate-type-select').val();
+    const certNumber = $('input[name="certificate_number"]').val();
+
+    $.ajax({
+      url: "{% url 'verify_certificate' %}",
+      method: "GET",
+      data: { certificate_number: certNumber },
+      headers: { "X-Requested-With": "XMLHttpRequest" },
+      success: function(response) {
+
+        $('#alert-container').hide();
+        function safe(val) {
+          return val === null || val === undefined ? '' : val;
+        }
+
+        const cert = response.certificate;
+        let html = `
+          <div class="alert alert-info" style="width: 100%; margin: 0 auto;">
+            In response to the query, we found the following result.
+          </div>
+        `;
+
+        if (certType === 'training' || certType === 'equipment') {
+          html += `
+            <div class="certificate-box">
+              <div class="heading-box">Found Result for the Request.</div>
+              <table class="custom-table no-middle-border">
+          `;
+
+          if (certType === 'training') {
+            html += `
+              <tr><th>Name</th><td>${safe(cert.name)}</td></tr>
+              <tr><th>Registration Number</th><td>${safe(cert.registration_number)}</td></tr>
+              <tr><th>Card Number</th><td>${safe(cert.card_number)}</td></tr>
+              <tr><th>Certificate Number</th><td>${safe(cert.certificate_number)}</td></tr>
+              <tr><th>Course</th><td>${safe(cert.course)}</td></tr>
+              <tr><th>Issue Date</th><td>${safe(cert.issue_date)}</td></tr>
+              <tr><th>Renewal Date</th><td>${safe(cert.renewal_date)}</td></tr>
             `;
-    
-            if (certType === 'training') {
-              html += `
-                <tr><th>Registration Number</th><td>${cert.registration_number}</td></tr>
-                <tr><th>Card Number</th><td>${cert.card_number}</td></tr>
-                <tr><th>Course</th><td>${cert.course}</td></tr>
-                <tr><th>Issue Date</th><td>${cert.issue_date}</td></tr>
-                <tr><th>Renewal Date</th><td>${cert.renewal_date}</td></tr>
-              `;
-            } else if (certType === 'equipment') {
-              html += `
-                <tr><th>Sticker No</th><td>${cert.sticker_no}</td></tr>
-                <tr><th>Equipment ID</th><td>${cert.equipment_id}</td></tr>
-                <tr><th>Inspection Date</th><td>${cert.inspection_date}</td></tr>
-                <tr><th>Next Inspection Date</th><td>${cert.next_inspection_date}</td></tr>
-                <tr><th>Location</th><td>${cert.location}</td></tr>
-                <tr><th>Comments</th><td>${cert.comments}</td></tr>
-              `;
-            } else if (certType === 'lifting') {
-              html += `
-                <tr><th>Item Name</th><td>${cert.item_name}</td></tr>
-                <tr><th>Date of Inspection</th><td>${cert.lifting_inspection_date}</td></tr>
-                <tr><th>Date of Next Inspection</th><td>${cert.lifting_next_inspection}</td></tr>
-                <tr><th>Serial No</th><td>${cert.serial_no}</td></tr>
-                <tr><th>Manufacturer</th><td>${cert.manufacturer}</td></tr>
-                <tr><th>Length</th><td>${cert.length}</td></tr>
-                <tr><th>SWL</th><td>${cert.swl}</td></tr>
-                <tr><th>Standard Ref</th><td>${cert.standard_ref}</td></tr>
-                <tr><th>Remarks</th><td>${cert.lifting_remarks}</td></tr>
-                <tr><th>Inspector</th><td>${cert.inspector}</td></tr>
-              `;
-            }
-    
-            html += '</table>';
-            $('#result-box').html(html);
-          },
-          error: function(xhr) {
-            const error = xhr.responseJSON?.error || 'An unknown error occurred';
-            $('#result-box').html(`<div class="alert alert-danger">${error}</div>`);
+          } else {
+            html += `
+              <tr><th>Name</th><td>${safe(cert.name)}</td></tr>
+              <tr><th>Certificate Number</th><td>${safe(cert.certificate_number)}</td></tr>
+              <tr><th>Sticker No</th><td>${safe(cert.sticker_no)}</td></tr>
+              <tr><th>Equipment ID</th><td>${safe(cert.equipment_id)}</td></tr>
+              <tr><th>Inspection Date</th><td>${safe(cert.inspection_date)}</td></tr>
+              <tr><th>Next Inspection Date</th><td>${safe(cert.next_inspection_date)}</td></tr>
+              <tr><th>Location</th><td>${safe(cert.location)}</td></tr>
+              <tr><th>Comments</th><td>${safe(cert.comments)}</td></tr>
+            `;
           }
-        });
-      });
-    </script>
-    
-    
+
+          html += `</table></div>`;
+        } else if (certType === 'lifting') {
+  // Prepare all fields in an array for easy checking
+  const liftingFields = [
+    cert.item_name,
+    cert.lifting_inspection_date,
+    cert.lifting_next_inspection,
+    cert.serial_no,
+    cert.manufacturer,
+    cert.length,
+    cert.swl,
+    cert.standard_ref,
+    cert.lifting_remarks,
+    cert.inspector
+  ];
+
+  // Check if at least one field is non-empty (not null/undefined/empty string)
+  const hasData = liftingFields.some(field => field !== null && field !== undefined && field.toString().trim() !== '');
+
+  html += `
+    <div style="width: 100%; margin: 0 auto;">
+      <table class="custom-lifting-table">
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Date of Inspection</th>
+            <th>Date of Next Inspection</th>
+            <th>Serial No.</th>
+            <th>Manufacturer</th>
+            <th>Length</th>
+            <th>SWL</th>
+            <th>Standard Ref.</th>
+            <th>Remarks</th>
+            <th>Inspector</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  if (hasData) {
+    html += `
+      <tr>
+        <td>${safe(cert.item_name)}</td>
+        <td>${safe(cert.lifting_inspection_date)}</td>
+        <td>${safe(cert.lifting_next_inspection)}</td>
+        <td>${safe(cert.serial_no)}</td>
+        <td>${safe(cert.manufacturer)}</td>
+        <td>${safe(cert.length)}</td>
+        <td>${safe(cert.swl)}</td>
+        <td>${safe(cert.standard_ref)}</td>
+        <td>${safe(cert.lifting_remarks)}</td>
+        <td>${safe(cert.inspector)}</td>
+      </tr>
+    `;
+  } 
+  // else no row added, only headers shown
+
+  html += `
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+        $('#result-box').html(html);
+      },
+      error: function(xhr) {
+        const error = xhr.responseJSON?.error || 'An unknown error occurred';
+        $('#result-box').html(`<div class="alert alert-danger">${error}</div>`);
+      }
+    });
+  });
+</script>
+
 
   </body>
 </html>
