@@ -1,0 +1,49 @@
+<h2>Certificate Details</h2>
+<input type="text" value="{{ certificate.certificate_number }}" readonly>
+<select id="typeSelector">
+  <option value="training">Training Certificate</option>
+  <option value="equipment">Equipment Certificate</option>
+  <option value="lifting">Lifting Gear Certificate</option>
+</select>
+
+<div id="training" class="cert-section">
+  <h3>Training Certificate</h3>
+  <p>Name: {{ certificate.name }}</p>
+  <p>Certificate #: {{ certificate.certificate_number }}</p>
+  <p>Registration #: {{ certificate.registration_number }}</p>
+  <p>Card #: {{ certificate.card_number }}</p>
+  <p>Course: {{ certificate.course }}</p>
+  <p>Issue Date: {{ certificate.issue_date }}</p>
+  <p>Renewal Date: {{ certificate.renewal_date }}</p>
+</div>
+
+<div id="equipment" class="cert-section" style="display:none;">
+  <h3>Equipment Certificate</h3>
+  <p>Sticker #: {{ certificate.sticker_no }}</p>
+  <p>Equipment ID: {{ certificate.equipment_id }}</p>
+  <p>Inspection Date: {{ certificate.inspection_date }}</p>
+  <p>Next Inspection: {{ certificate.next_inspection_date }}</p>
+  <p>Location: {{ certificate.location }}</p>
+  <p>Comments: {{ certificate.comments }}</p>
+</div>
+
+<div id="lifting" class="cert-section" style="display:none;">
+  <h3>Lifting Gear Certificate</h3>
+  <p>Item Name: {{ certificate.item_name }}</p>
+  <p>Serial #: {{ certificate.serial_no }}</p>
+  <p>Manufacturer: {{ certificate.manufacturer }}</p>
+  <p>Length: {{ certificate.length }}</p>
+  <p>SWL: {{ certificate.swl }}</p>
+  <p>Standard Ref: {{ certificate.standard_ref }}</p>
+  <p>Inspection Date: {{ certificate.lifting_inspection_date }}</p>
+  <p>Next Inspection: {{ certificate.lifting_next_inspection }}</p>
+  <p>Remarks: {{ certificate.lifting_remarks }}</p>
+  <p>Inspector: {{ certificate.inspector }}</p>
+</div>
+
+<script>
+document.getElementById('typeSelector').addEventListener('change', function () {
+  document.querySelectorAll('.cert-section').forEach(div => div.style.display = 'none');
+  document.getElementById(this.value).style.display = 'block';
+});
+</script>

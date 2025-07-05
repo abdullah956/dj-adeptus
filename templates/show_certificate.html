@@ -1,0 +1,14 @@
+<h2>All Certificates</h2>
+
+{% for certificate in certificates %}
+  <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+    <p><strong>Certificate Number:</strong> {{ certificate.certificate_number }}</p>
+    <p><strong>Name:</strong> {{ certificate.name }}</p>
+
+    {% if certificate.qr_code %}
+      <img src="{{ certificate.qr_code.url }}" alt="QR Code" style="width: 150px;">
+    {% else %}
+      <p>No QR code available.</p>
+    {% endif %}
+  </div>
+{% endfor %}

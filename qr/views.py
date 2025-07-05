@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Certificate
 
 
@@ -45,3 +45,13 @@ def verify_certificate(request):
             return JsonResponse({'error': 'Certificate not found'}, status=404)
 
     return render(request, 'home.html')
+
+
+def verify_certificate_qr(request, certificate_number):
+    certificate = get_object_or_404(Certificate, certificate_number=certificate_number)
+    return render(request, 'verify_qr.html', {'certificate': certificate})
+
+
+def show_all_certificates(request):
+    certificates = Certificate.objects.all()
+    return render(request, 'show_certificate.html', {'certificates': certificates})

@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_DOMAIN = 'http://127.0.0.1:8000'  # Or your live domain later
+
 
 # Application definition
 
