@@ -51,6 +51,18 @@ def verify_certificate_qr(request, certificate_number):
     certificate = get_object_or_404(Certificate, certificate_number=certificate_number)
     return render(request, 'verify_qr.html', {'certificate': certificate})
 
+# def verify_certificate_qr(request, certificate_number):
+#     try:
+#         cert = Certificate.objects.get(certificate_number=certificate_number)
+#     except Certificate.DoesNotExist:
+#         cert = None
+
+#     return render(request, 'verify_qr.html', {
+#         'certificate': cert,
+#         'default_type': 'training'
+#     })
+
+
 
 def show_all_certificates(request):
     certificates = Certificate.objects.all()

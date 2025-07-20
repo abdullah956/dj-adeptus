@@ -1,4 +1,4 @@
-<h2>Certificate Details</h2>
+<!-- <h2>Certificate Details</h2>
 <input type="text" value="{{ certificate.certificate_number }}" readonly>
 <select id="typeSelector">
   <option value="training">Training Certificate</option>
@@ -46,4 +46,2102 @@ document.getElementById('typeSelector').addEventListener('change', function () {
   document.querySelectorAll('.cert-section').forEach(div => div.style.display = 'none');
   document.getElementById(this.value).style.display = 'block';
 });
-</script>
+</script> -->
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Adeptus Cerification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS & Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      .top-bar-wrapper {
+        position: relative;
+        background: #16333a;
+        color: white;
+        border-bottom: 4px solid #39aabd;
+        height: 40px;
+      }
+
+      .top-bar {
+        background: #39aabd;
+        width: max-content;
+        padding: 0.5rem 3rem;
+        clip-path: polygon(6% 0, 94% 0, 100% 100%, 0% 100%);
+        height: 40px;
+      }
+
+      .top-bar .contact-item i {
+        background-color: #003742;
+        color: white;
+        padding: 3px 6px;
+        border-radius: 4px;
+        margin-right: 5px;
+        font-size: 12px;
+      }
+
+      .top-bar .contact-item strong {
+        font-size: 12px;
+      }
+
+      .top-bar .contact-item span {
+        font-size: 12px;
+      }
+
+      .nav-button {
+        background-color: #39aabd;
+      }
+
+      .navbar-brand img {
+        height: 50px;
+      }
+
+      .verify-btn {
+        background-color: #39aabd;
+        border: none;
+        padding: 13px 22px;
+        color: white;
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: 12px;
+        text-decoration: none;
+      }
+
+      .navbar-nav .nav-link {
+        font-weight: 500;
+        font-size: 1rem;
+        color: black;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: #39aabd;
+      }
+
+      @media (max-width: 768px) {
+        .top-bar .d-flex.justify-content-between {
+          flex-direction: column;
+          align-items: center;
+        }
+        .verify-btn {
+          margin-top: 10px;
+        }
+      }
+
+      .header-section {
+        background: url('{% static "images/inner-about-image.jpg" %}') no-repeat
+          center center;
+        background-size: cover;
+        height: 300px;
+        position: relative;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .overlay-text {
+        position: relative;
+        z-index: 1;
+      }
+      .overlay-text h1 {
+        font-size: 3.8rem;
+        font-weight: 500;
+      }
+      .overlay-text p {
+        font-size: 1rem;
+      }
+      /* Optional: Add a dark overlay for better text visibility */
+      .header-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0);
+        z-index: 0;
+      }
+      .section-container {
+        padding: 0px 0;
+      }
+      .text-content h1 {
+        color: #000000;
+        font-size: 3rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+      .text-content p {
+        color: #000000;
+        font-size: 1.2rem;
+      }
+
+      .error-box {
+        background-color: #f8d7da;
+        color: #842029;
+        padding: 1rem;
+        border-radius: 5px;
+        margin-top: 1rem;
+      }
+
+      .form-select,
+      .form-control {
+        height: 50px;
+      }
+
+      .consultation-banner {
+        background-color: #42aac0;
+        background-image: url('{% static "images/bg-consult" %}'); /* optional texture */
+        color: white;
+        border-radius: 10px;
+        padding: 40px 30px;
+      }
+
+      .consultation-btn {
+        background-color: #062c33;
+        color: white;
+        font-weight: bold;
+        border-radius: 12px;
+        padding: 12px 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .consultation-btn:hover {
+        background-color: #041d22;
+        text-decoration: none;
+        color: white;
+      }
+
+      @media (max-width: 767.98px) {
+        .consultation-banner {
+          text-align: center;
+        }
+
+        .consultation-btn {
+          margin-top: 20px;
+        }
+      }
+
+      .question-section {
+        padding: 0px 15px;
+        text-align: center;
+      }
+
+      .question-title {
+        color: #000000;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-top: 15px;
+      }
+
+      .question-description {
+        color: #555;
+        max-width: 800px;
+        margin: 15px auto 0;
+      }
+
+      .accordion-item {
+        border: none;
+        margin-bottom: 10px;
+        background-color: #f5f5f5;
+        border-radius: 6px;
+        margin: 40px 0;
+      }
+
+      .accordion-header {
+        padding: 10px 0;
+      }
+
+      .accordion-button {
+        font-weight: 600;
+        color: #002b45;
+        background-color: #f5f5f5;
+        box-shadow: none;
+        padding: 1rem 1.25rem;
+      }
+
+      .accordion-button:not(.collapsed) {
+        color: #002b45;
+        background-color: #f5f5f5;
+      }
+
+      .accordion-button::after {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23002b45' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.5 6.5l6 6 6-6H1.5z'/%3E%3C/svg%3E");
+        transform: rotate(-180deg);
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .accordion-button.collapsed::after {
+        transform: rotate(0deg);
+      }
+
+      .accordion-body {
+        background-color: #ffffff; /* match the accordion button */
+        color: #444;
+        padding: 1rem 1.25rem;
+        border-radius: 0 0 6px 6px;
+        margin-bottom: 50px;
+      }
+
+      @media (max-width: 768px) {
+        .row.align-items-center {
+          flex-direction: column;
+        }
+      }
+
+      .contact-section {
+        background: url("{% static 'images/bg.png' %}") no-repeat center center;
+        background-size: cover;
+        padding: 50px 0 180px;
+        position: relative;
+        background-color: #f0f0f0;
+        height: 80vh;
+      }
+
+      .contact-container {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+      }
+
+      .contact-left {
+        background: url("{% static 'images/contact-info-bg.jpg' %}") no-repeat
+          center center;
+        background-size: cover;
+        color: #fff;
+        padding: 40px;
+      }
+
+      .contact-left h3 {
+        font-weight: bold;
+      }
+
+      .contact-item {
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 50px;
+      }
+
+      .contact-item i {
+        font-size: 18px;
+        margin-right: 15px;
+        background: #16333a;
+        padding: 14px 18px;
+        border-radius: 50%;
+      }
+
+      .contact-right {
+        padding: 40px;
+      }
+
+      .contact-right label {
+        font-weight: bold;
+        font-size: 12px;
+      }
+
+      .form-control {
+        background-color: #f1f1f1;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+      }
+
+      .alert {
+        background: #d1e7dd;
+        border: none;
+        color: #0f5132;
+      }
+
+      @media (max-width: 767.98px) {
+        .contact-left,
+        .contact-right {
+          padding: 20px;
+        }
+      }
+
+      .blog-section {
+        margin-top: 300px;
+      }
+
+      @media (max-width: 989px) {
+        .blog-section {
+          margin-top: 400px;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .blog-section {
+          margin-top: 900px;
+        }
+      }
+
+      .footer-top {
+        background: #3aa7b4;
+        padding: 40px;
+        color: white;
+        border-radius: 14px;
+        width: 90%;
+      }
+      .footer-top h2 {
+        font-weight: bold;
+      }
+      .footer-main {
+        background-color: #0d2e35;
+        color: white;
+        padding: 40px 0;
+      }
+      .footer-main h5 {
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .footer-main a {
+        color: #ffffff;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
+        font-size: 13px;
+      }
+      .footer-main a:hover {
+        text-decoration: none;
+      }
+      .footer-logo img {
+        width: 200px;
+      }
+      .btn-contact {
+        background-color: #4bd6e5;
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+        width: 180px;
+      }
+
+      .btn-contact:hover{
+        background-color: #4bd6e5;
+        color: rgb(255, 255, 255);
+      }
+
+     
+      .footer-gallery img {
+        width: 60px;
+        height: 60px;
+        margin: 5px;
+        object-fit: cover;
+        border-radius: 5px;
+        background-color: #0d2e35;
+      }
+
+
+
+      .footer-bottom {
+        background-color: #0a232a;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Bar with Diagonal Design -->
+    <!-- Top Bar Wrapper with only Email + Phone -->
+    <div class="top-bar-wrapper d-none d-lg-block">
+      <div
+        class="container d-flex justify-content-between align-items-center flex-wrap"
+      >
+        <!-- Clip Background on This Only -->
+        <div class="top-bar d-flex align-items-center flex-wrap me-3">
+          <div class="d-flex align-items-center contact-item me-4">
+            <i class="bi bi-envelope-fill"></i>
+            <strong>Email Us !</strong>
+            <span class="ms-1 text-decoration-underline"
+              >info@adeptuscertifications.co.uk</span
+            >
+          </div>
+          <div class="d-flex align-items-center contact-item">
+            <i class="bi bi-telephone-fill"></i>
+            <strong>Need Help !</strong>
+            <span class="ms-1 text-decoration-underline">+966 50 126 4259</span>
+          </div>
+        </div>
+
+        <!-- Remaining Right Side -->
+        <div class="d-flex align-items-center">
+          <a
+            href="#"
+            class="d-flex align-items-center text-white me-3 border-end border-white pe-3"
+            style="text-decoration: none"
+          >
+            <div
+              class="nav-button rounded-2 d-flex justify-content-center align-items-center"
+              style="width: 25px; height: 25px"
+            >
+              <i class="bi bi-person text-white"></i>
+            </div>
+            <span class="ms-2" style="font-size: 14px">Login/Signup</span>
+          </a>
+
+          <span style="font-size: 14px"><strong>Follow us:</strong></span>
+          <a href="#" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-white mx-1"
+            ><i class="fab fa-x-twitter"></i
+          ></a>
+          <a href="#" class="text-white mx-1"
+            ><i class="bi bi-instagram"></i
+          ></a>
+          <a href="#" class="text-white mx-1"><i class="bi bi-dribbble"></i></a>
+        </div>
+        <img
+          src="{% static 'images/right-poly.png' %}"
+          style="
+            width: 70px;
+            height: 40px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+          "
+          alt=""
+        />
+      </div>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="{% static 'images/logo-large' %}" alt="ADEPTUS Logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-between"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/about-us"
+                target="_blank"
+                >About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/course-categories"
+                target="_blank"
+                >Courses</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/service-categories"
+                target="_blank"
+                >Services</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/blogs"
+                target="_blank"
+                >Blogs</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/contact-us"
+                target="_blank"
+                >Contact Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/photo-gallery"
+                target="_blank"
+                >photo-gallery</a
+              >
+            </li>
+          </ul>
+          <div class="d-flex align-items-center">
+            <i class="bi bi-search fs-5 me-3"></i>
+            <a href="#" class="verify-btn d-flex align-items-center">
+              Verify Certification
+              <i
+                class="bi bi-arrow-right ms-2"
+                style="transform: rotate(310deg); font-weight: bold"
+              ></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="header-section">
+      <div class="overlay-text">
+        <h1>Verify Certificate</h1>
+        <p>Home > Verify Certificate</p>
+      </div>
+    </div>
+
+    <div class="container section-container mt-5">
+      <div class="row align-items-center mx-auto" style="width: 95%;">
+        <div class="col-md-6 text-content">
+          <span class=""
+            ><img
+              src="{% static 'images/cef-heading.png' %}"
+              alt=""
+              style="width: 190px"
+              class="mb-3"
+          /></span>
+          <h1>Verify Certificate</h1>
+          <p>
+            Enter Detail verify the authenticity of your Training/Equipment
+            Certificate.
+          </p>
+        </div>
+        <div class="col-md-6 mt-5">
+          <img
+            src="{% static 'images/service-image.jpg' %}"
+            alt="Certificate Verification"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="container pt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-12">
+          <form id="">
+            <div class="row g-2">
+              <div class="col-md-4">
+                <input type="text" name="certificate_number" class="form-control" value="{{ certificate.certificate_number }}" readonly 
+                  style="height: 40px; background-color: white; border: 1px solid rgb(223, 223, 223);" />
+              </div>
+              <div class="col-md-7">
+                <select id="typeSelector" class="form-select" required>
+                  <option value="training">Training Certificate</option>
+                  <option value="equipment">Equipment Certificate</option>
+                  <option value="lifting">Lifting Gear Certificate</option> 
+                </select>
+              </div>
+              <div class="col-md-1">
+                <button type="none" class="" >Submit</button>
+              </div>
+            </div>
+          </form>
+
+          <div id="alert-container">
+  <div style="width: 100%; margin: 0 auto; background-color: #c6e4ccd7; color: #175c19; border: 1px solid #c2f5ca; padding: 0.80rem 1.25rem; border-radius: 0.25rem;">
+    In response to the query, we found the following result.
+  </div>
+  <!-- <p class="mt-2">
+    If the certificate you are verifying does not appear here, please
+    <a href="#" class="text-decoration-none">email</a> us the certificate details.
+  </p> -->
+</div>
+
+
+          
+
+          <div id="result-box" class="mt-4"></div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+<!-- <div id="training" class="cert-section">
+  <h3>Training Certificate</h3>
+  <p>Name: {{ certificate.name }}</p>
+  <p>Certificate #: {{ certificate.certificate_number }}</p>
+  <p>Registration #: {{ certificate.registration_number }}</p>
+  <p>Card #: {{ certificate.card_number }}</p>
+  <p>Course: {{ certificate.course }}</p>
+  <p>Issue Date: {{ certificate.issue_date }}</p>
+  <p>Renewal Date: {{ certificate.renewal_date }}</p>
+</div> -->
+<div class="container cert-section mt-0" style="max-width: 800px;" id="training">
+    <table class="table table-bordered text-center" style="border-collapse: collapse; font-family: Arial, sans-serif; border: 1px solid #000;">
+        <thead>
+            <tr>
+                <th colspan="2" class="text-white" style="background-color: #8bbd3f; padding: 6px; font-size: 20px; border: 1px solid #000;">
+                    Found Result for the Request.
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="" >
+                <td class="py-2 border-end-0" style="background-color: #f2f2f2;">Name</td>
+                <td class="py-2 border-start-0" style="background-color: #f2f2f2;">{{ certificate.name|default_if_none:"" }}</td>
+            </tr>
+            <tr>
+                <td class="py-2 border-end-0">Registration Number</td>
+                <td class="py-2 border-start-0">{{ certificate.registration_number|default_if_none:"" }}</td>
+            </tr>
+            <tr class="bg-light">
+                <td class="py-2 border-end-0" style="background-color: #f2f2f2;">Card Number</td>
+                <td class="py-2 border-start-0" style="background-color: #f2f2f2;">{{ certificate.card_number|default_if_none:"" }}</td>
+            </tr>
+            <tr>
+                <td class="py-2 border-end-0">Certificate Number</td>
+                <td class="py-2 border-start-0">{{ certificate.certificate_number|default_if_none:"" }}</td>
+            </tr>
+            <tr class="bg-light">
+                <td class="py-2 border-end-0" style="background-color: #f2f2f2;">Course</td>
+                <td class="py-2 border-start-0" style="background-color: #f2f2f2;">{{ certificate.course|default_if_none:"" }}</td>
+            </tr>
+            <tr>
+                <td class="py-2 border-end-0">Issue Date</td>
+                <td class="py-2 border-start-0">{{ certificate.issue_date|default_if_none:"" }}</td>
+            </tr>
+            <tr class="bg-light">
+                <td class="py-2 border-end-0" style="background-color: #f2f2f2;">Renewal Date</td>
+                <td class="py-2 border-start-0" style="background-color: #f2f2f2;">{{ certificate.renewal_date|default_if_none:"" }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="equipment" class="cert-section" style="display: none;">
+    <table class="table table-bordered text-center" style="border-collapse: collapse; font-family: Arial, sans-serif; border: 1px solid #000; max-width: 800px; margin: auto;">
+        <thead>
+            <tr>
+                <th colspan="2" class="text-white" style="background-color: #8bbd3f; padding: 6px; font-size: 20px; border: 1px solid #000;">
+                    Found Result for the Request.
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr class="" >
+                <td class="py-2 border-end-0" style="background-color: #f2f2f2;">Name</td>
+                <td class="py-2 border-start-0" style="background-color: #f2f2f2;">{{ certificate.name|default_if_none:"" }}</td>
+            </tr>
+            <tr>
+                <td class="py-2 border-end-0">Certificate Number</td>
+                <td class="py-2 border-start-0">{{ certificate.certificate_number|default_if_none:"" }}</td>
+            </tr>
+            <tr class="">
+                <td class="py-2 border-end-0" style="background-color: #f2f2f2;">Sticker No</td>
+                <td class="py-2 border-start-0" style="background-color: #f2f2f2;">{{ certificate.sticker_no|default_if_none:"" }}</td>
+            </tr>
+            <tr>
+                <td class="py-2 border-end-0">Equipment ID</td>
+                <td class="py-2 border-start-0">{{ certificate.equipment_id|default_if_none:"" }}</td>
+            </tr>
+            <tr class="bg-light">
+                <td class="py-2 border-end-0" style="background-color: #f2f2f2;">Inspection Date</td>
+                <td class="py-2 border-start-0" style="background-color: #f2f2f2;">{{ certificate.inspection_date|default_if_none:"" }}</td>
+            </tr>
+            <tr>
+                <td class="py-2 border-end-0">Next Inspection Date</td>
+                <td class="py-2 border-start-0">{{ certificate.next_inspection_date|default_if_none:"" }}</td>
+            </tr>
+            <tr class="bg-light">
+                <td class="py-2 border-end-0" style="background-color: #f2f2f2;">Location</td>
+                <td class="py-2 border-start-0" style="background-color: #f2f2f2;">{{ certificate.location|default_if_none:"" }}</td>
+            </tr>
+            <tr>
+                <td class="py-2 border-end-0">Comments</td>
+                <td class="py-2 border-start-0">{{ certificate.comments|default_if_none:"" }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- <div id="equipment" class="cert-section" style="display:none;">
+  <h3>Equipment Certificate</h3>
+  <p>Sticker #: {{ certificate.sticker_no }}</p>
+  <p>Equipment ID: {{ certificate.equipment_id }}</p>
+  <p>Inspection Date: {{ certificate.inspection_date }}</p>
+  <p>Next Inspection: {{ certificate.next_inspection_date }}</p>
+  <p>Location: {{ certificate.location }}</p>
+  <p>Comments: {{ certificate.comments }}</p>
+</div> -->
+
+<div id="lifting" class="cert-section mx-auto" style="display: none; max-width:1200px">
+    {% if certificate.item_name or certificate.serial_no or certificate.manufacturer or certificate.length or certificate.swl or certificate.standard_ref or certificate.lifting_inspection_date or certificate.lifting_next_inspection or certificate.lifting_remarks or certificate.inspector %}
+        <table class="table table-bordered text-center" style="border-collapse: collapse; font-family: Arial, sans-serif; border: 1px solid #000; max-width: 100%; margin: auto;">
+            <thead>
+                <tr class="fw-bold">
+                    <th>Item Name</th>
+                    <th>Date of Inspection</th>
+                    <th>Date of Next Inspection</th>
+                    <th>Serial No.</th>
+                    <th>Manufacturer</th>
+                    <th>Length</th>
+                    <th>SWL</th>
+                    <th>Standard Ref.</th>
+                    <th>Remarks</th>
+                    <th>Inspector</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="py-2">{{ certificate.item_name|default_if_none:"" }}</td>
+                    <td class="py-2">{{ certificate.lifting_inspection_date|default_if_none:"" }}</td>
+                    <td class="py-2">{{ certificate.lifting_next_inspection|default_if_none:"" }}</td>
+                    <td class="py-2">{{ certificate.serial_no|default_if_none:"" }}</td>
+                    <td class="py-2">{{ certificate.manufacturer|default_if_none:"" }}</td>
+                    <td class="py-2">{{ certificate.length|default_if_none:"" }}</td>
+                    <td class="py-2">{{ certificate.swl|default_if_none:"" }}</td>
+                    <td class="py-2">{{ certificate.standard_ref|default_if_none:"" }}</td>
+                    <td class="py-2">{{ certificate.lifting_remarks|default_if_none:"" }}</td>
+                    <td class="py-2">{{ certificate.inspector|default_if_none:"" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+
+
+<!-- <div id="lifting" class="cert-section" style="display:none;">
+  <h3>Lifting Gear Certificate</h3>
+  <p>Item Name: {{ certificate.item_name }}</p>
+  <p>Serial #: {{ certificate.serial_no }}</p>
+  <p>Manufacturer: {{ certificate.manufacturer }}</p>
+  <p>Length: {{ certificate.length }}</p>
+  <p>SWL: {{ certificate.swl }}</p>
+  <p>Standard Ref: {{ certificate.standard_ref }}</p>
+  <p>Inspection Date: {{ certificate.lifting_inspection_date }}</p>
+  <p>Next Inspection: {{ certificate.lifting_next_inspection }}</p>
+  <p>Remarks: {{ certificate.lifting_remarks }}</p>
+  <p>Inspector: {{ certificate.inspector }}</p>
+</div> -->
+
+<script>
+document.getElementById('typeSelector').addEventListener('change', function () {
+  document.querySelectorAll('.cert-section').forEach(div => div.style.display = 'none');
+  document.getElementById(this.value).style.display = 'block';
+});
+</script> 
+
+
+
+    <div class="container py-5 mt-3">
+      <div
+        class="consultation-banner d-flex flex-column flex-md-row justify-content-between align-items-center"
+      >
+        <div class="mb-3 mb-md-0">
+          <h3 class="fw-bold mb-1">Get Free Consultation Now !</h3>
+          <p class="mb-0">
+            Latest News , Informative blogs , upcoming events and lot more for
+            Adeptus Certification
+          </p>
+        </div>
+        <a href="#" class="consultation-btn">
+          Contact us Now!
+          <i
+            class="bi bi-arrow-right ms-2"
+            style="transform: rotate(310deg); font-weight: bold"
+          ></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="container question-section">
+      <div class="question-subtitle">
+        <img
+          src="{% static 'images/answer.png' %}"
+          alt=""
+          style="width: 220px"
+        />
+      </div>
+      <h2 class="question-title">Frequently Asked Questions</h2>
+      <p class="question-description">
+        Sed eu sapien nec diam venenatis fringilla id vitae erat. Sed tincidunt,
+        metus sed sodales iaculis, mauris odio
+      </p>
+    </div>
+
+    <div class="container py-5">
+      <div class="row align-items-center">
+        <!-- Accordion Section -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="accordion" id="faqAccordion">
+            <!-- Item 1 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  How i will get to know about the result
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse show"
+                aria-labelledby="headingOne"
+                data-bs-parent="#faqAccordion"
+              >
+                <div class="accordion-body">
+                  The results of each course will be available on our website
+                  also the candidate/ company will be informed via email about
+                  the result once declared.
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  How we can see our certificates online
+                </button>
+              </h2>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#faqAccordion"
+              >
+                <div class="accordion-body">
+                  Each certificate has its own unique certification number,
+                  through which you can verify the certificate in our online
+                  verification portal
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  How long it will take to Get certificate
+                </button>
+              </h2>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#faqAccordion"
+              >
+                <div class="accordion-body">
+                  every certificate has its own duration and may take from 1 day
+                  to 3 month or more depending upon the type of certification
+                  and procedure of issuing body
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour"
+                  aria-expanded="false"
+                  aria-controls="collapseFour"
+                >
+                  How i can Enroll in the Training Course
+                </button>
+              </h2>
+              <div
+                id="collapseFour"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingFour"
+                data-bs-parent="#faqAccordion"
+              >
+                <div class="accordion-body">
+                  One can submit the request to enroll in the upcoming training
+                  course directly by filling out the online admission or contact
+                  form.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Section -->
+        <div class="col-lg-6">
+          <img
+            src="{% static 'images/faq-image.jpg' %}"
+            alt="Engineers looking at map"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </div>
+
+    <section class="contact-section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <img
+            src="{% static 'images/contact-heading.png' %}"
+            alt=""
+            style="width: 160px"
+            class="mb-1"
+          />
+          <h2 class="fw-bold">Contact Adeptus Now!</h2>
+          <p class="text-muted">
+            Sed eu sapien nec diam venenatis fringilla id vitae erat. Sed
+            tincidunt, metus sed sodales iaculis, mauris odio
+          </p>
+        </div>
+
+        <div class="row contact-container mx-auto" style="width: 88%">
+          <div class="col-md-5 contact-left">
+            <h3>Contact Information</h3>
+            <div class="contact-item mt-5">
+              <i class="bi bi-geo-alt-fill"></i>
+              <div>
+                <strong>Address</strong><br />
+                Office 607, 7172 Ibn Sulaiman<br />
+                Commercial Center, Office's Tower,<br />
+                Riyadh 12633, Saudi Arabia
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="bi bi-telephone-fill"></i>
+              <div>
+                <strong>Phone Number</strong><br />
+                +966 50 126 4259
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="bi bi-envelope-fill"></i>
+              <div>
+                <strong>Email</strong><br />
+                info@adeptuscertifications.co.uk
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-7 contact-right">
+            <h4 class="mb-4 fw-bold">Fill The Form & Contact Us</h4>
+            <div class="alert">Invalid certificate number</div>
+            <form>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    placeholder="Enter First Name"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    placeholder="Enter Last Name"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Enter Email Address"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone"
+                    placeholder="Enter Phone Number"
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="message" class="form-label">Your Message</label>
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    style="height: 120px"
+                    placeholder="Write your message here..."
+                  ></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5 bg-white blog-section">
+      <div class="container text-center">
+        <img
+          src="{% static 'images/blog-heading.png' %}"
+          alt=""
+          style="width: 150px"
+          class="mb-1"
+        />
+        <h2 class="fw-bold mb-2">Latest News & Articles</h2>
+        <p class="text-muted">
+          Latest News , Informative blogs , upcoming events and lot more for
+          Adeptus Certification
+        </p>
+
+        <div class="row mt-5 g-4">
+          <!-- Blog Card 1 -->
+          <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 rounded-4 p-2">
+              <img
+                src="{% static 'images/offers' %}"
+                class="card-img-top rounded-top-4"
+                alt="Blog 1"
+              />
+              <div class="card-body text-start">
+                <div class="d-flex align-items-center mb-2 text-muted small">
+                  <span class="me-1">—</span>
+                  <span class="me-2">By Adeptus</span>
+                  <strong class="me-2">Oct 26, 2020</strong>
+                </div>
+                <h5 class="card-title fw-bold mb-0">Education Programs</h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blog Card 2 -->
+          <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 rounded-4 p-2">
+              <img
+                src="{% static 'images/training' %}"
+                class="card-img-top rounded-top-4"
+                alt="Blog 2"
+              />
+              <div class="card-body text-start">
+                <div class="d-flex align-items-center mb-2 text-muted small">
+                  <span class="me-1">—</span>
+                  <span class="me-2">By Adeptus</span>
+                  <strong class="me-2">Oct 26, 2020</strong>
+                </div>
+                <h5 class="card-title fw-bold mb-0">
+                  Benefits of Combined Study
+                </h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blog Card 3 -->
+          <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 rounded-4 p-2">
+              <img
+                src="{% static 'images/certification' %}"
+                class="card-img-top rounded-top-4"
+                alt="Blog 3"
+              />
+              <div class="card-body text-start">
+                <div class="d-flex align-items-center mb-2 text-muted small">
+                  <span class="me-1">—</span>
+                  <span class="me-2">By Adeptus</span>
+                  <strong class="me-2">Mar 27, 2022</strong>
+                </div>
+                <h5 class="card-title fw-bold mb-0">
+                  Importance of Professional cer...
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- Footer Top Section -->
+<div class="footer-top position-relative text-white px-4 mx-auto" style="background-color: #3aa7b4; border-top-left-radius: 15px; border-top-right-radius: 15px;padding: 30px 0;margin-bottom: -50px;background-image: url('{% static "images/bg-consult" %}');">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-9">
+        <h2 class="fw-bold mb-2">Get Free Consultation Now !</h2>
+        <p class="mb-0">It is a long established fact that a reader will be distracted the readable content of a page</p>
+      </div>
+      <div class="col-md-3 text-md-end mt-3 mt-md-0">
+        <a href="#" class="btn btn-dark px-4 py-2 d-inline-flex align-items-center" style="border-radius: 10px;">
+          Contact us Now!
+          <img src="https://via.placeholder.com/20" alt="" class="ms-2">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Footer Main Section -->
+    <footer class="footer-main" style="padding-top: 120px">
+      <div class="container">
+        <div class="row">
+          <!-- Logo & Button -->
+          <div class="col-md-3">
+            <div class="footer-logo">
+              <img
+                src="{% static 'images/adp.png' %}"
+                alt=""
+                class="mb-2"
+              />
+            </div>
+            <p>Default description</p>
+            <button class="btn btn-contact mt-1">
+              Contact us Now! <span>&#8599;</span>
+            </button>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="col-md-3">
+            <h5>Quick Links</h5>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Courses</a>
+            <a href="#">Blogs</a>
+            <a href="#">Upcoming Courses</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Approvals and Accreditation</a>
+          </div>
+
+          <!-- Our Services -->
+          <div class="col-md-3">
+            <h5>Our Services</h5>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Courses</a>
+            <a href="#">Blogs</a>
+            <a href="#">Upcoming Courses</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Approvals and Accreditation</a>
+          </div>
+
+          <!-- Our Gallery -->
+          <div class="col-md-3">
+            <h5>Our Gallery</h5>
+            <div class="footer-gallery d-flex flex-wrap">
+              <img src="https://via.placeholder.com/40" alt="" />
+              <img src="https://via.placeholder.com/40" alt="" />
+              <img src="https://via.placeholder.com/40" alt="" />
+              <img src="https://via.placeholder.com/40" alt="" />
+              <img src="https://via.placeholder.com/40" alt="" />
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom py-3">
+      © 2025 Adeptus Certifications. All rights reserved.
+    </div>
+
+     <div class="top-bar-wrapper d-none d-lg-block">
+      <div
+        class="container d-flex justify-content-between align-items-center flex-wrap"
+      >
+        <!-- Clip Background on This Only -->
+        <div class="top-bar d-flex align-items-center flex-wrap me-3">
+          <div class="d-flex align-items-center contact-item me-4">
+            <i class="bi bi-envelope-fill"></i>
+            <strong>Email Us !</strong>
+            <span class="ms-1 text-decoration-underline"
+              >info@adeptuscertifications.co.uk</span
+            >
+          </div>
+          <div class="d-flex align-items-center contact-item">
+            <i class="bi bi-telephone-fill"></i>
+            <strong>Need Help !</strong>
+            <span class="ms-1 text-decoration-underline">+966 50 126 4259</span>
+          </div>
+        </div>
+
+        <!-- Remaining Right Side -->
+        <div class="d-flex align-items-center">
+          <a
+            href="#"
+            class="d-flex align-items-center text-white me-3 border-end border-white pe-3"
+            style="text-decoration: none"
+          >
+            <div
+              class="nav-button rounded-2 d-flex justify-content-center align-items-center"
+              style="width: 25px; height: 25px"
+            >
+              <i class="bi bi-person text-white"></i>
+            </div>
+            <span class="ms-2" style="font-size: 14px">Login/Signup</span>
+          </a>
+
+          <span style="font-size: 14px"><strong>Follow us:</strong></span>
+          <a href="#" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-white mx-1"
+            ><i class="fab fa-x-twitter"></i
+          ></a>
+          <a href="#" class="text-white mx-1"
+            ><i class="bi bi-instagram"></i
+          ></a>
+          <a href="#" class="text-white mx-1"><i class="bi bi-dribbble"></i></a>
+        </div>
+        <img
+          src="{% static 'images/right-poly.png' %}"
+          style="
+            width: 70px;
+            height: 40px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+          "
+          alt=""
+        />
+      </div>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="{% static 'images/logo-large' %}" alt="ADEPTUS Logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-between"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/about-us"
+                target="_blank"
+                >About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/course-categories"
+                target="_blank"
+                >Courses</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/service-categories"
+                target="_blank"
+                >Services</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/blogs"
+                target="_blank"
+                >Blogs</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/contact-us"
+                target="_blank"
+                >Contact Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.adeptuscertifications.co.uk/photo-gallery"
+                target="_blank"
+                >photo-gallery</a
+              >
+            </li>
+          </ul>
+          <div class="d-flex align-items-center">
+            <i class="bi bi-search fs-5 me-3"></i>
+            <a href="#" class="verify-btn d-flex align-items-center">
+              Verify Certification
+              <i
+                class="bi bi-arrow-right ms-2"
+                style="transform: rotate(310deg); font-weight: bold"
+              ></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="header-section">
+      <div class="overlay-text">
+        <h1>Verify Certificate</h1>
+        <p>Home > Verify Certificate</p>
+      </div>
+    </div>
+
+    <div class="container section-container mt-5">
+      <div class="row align-items-center mx-auto" style="width: 95%;">
+        <div class="col-md-6 text-content">
+          <span class=""
+            ><img
+              src="{% static 'images/cef-heading.png' %}"
+              alt=""
+              style="width: 190px"
+              class="mb-3"
+          /></span>
+          <h1>Verify Certificate</h1>
+          <p>
+            Enter Detail verify the authenticity of your Training/Equipment
+            Certificate.
+          </p>
+        </div>
+        <div class="col-md-6 mt-5">
+          <img
+            src="{% static 'images/service-image.jpg' %}"
+            alt="Certificate Verification"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-12">
+      <form class="verify-form">
+        <div class="row g-2">
+          <div class="col-md-4">
+            <input type="text" name="certificate_number" class="form-control cert-number"
+              placeholder="Enter Your Certificate Number"
+              style="height: 40px; background-color: white; border: 1px solid rgb(223, 223, 223);" required />
+          </div>
+          <div class="col-md-7">
+            <select name="certificate_type" class="form-select cert-type" required>
+              <option value="">Select Type</option>
+              <option value="training">Training Certificate</option>
+              <option value="equipment">Equipment Certificate</option>
+              <option value="lifting">Lifting Gear Certificate</option>
+            </select>
+          </div>
+          <div class="col-md-1">
+            <button type="submit" class="">Submit</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="result-box mt-4"></div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container py-5 mt-3">
+      <div
+        class="consultation-banner d-flex flex-column flex-md-row justify-content-between align-items-center"
+      >
+        <div class="mb-3 mb-md-0">
+          <h3 class="fw-bold mb-1">Get Free Consultation Now !</h3>
+          <p class="mb-0">
+            Latest News , Informative blogs , upcoming events and lot more for
+            Adeptus Certification
+          </p>
+        </div>
+        <a href="#" class="consultation-btn">
+          Contact us Now!
+          <i
+            class="bi bi-arrow-right ms-2"
+            style="transform: rotate(310deg); font-weight: bold"
+          ></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="container question-section">
+      <div class="question-subtitle">
+        <img
+          src="{% static 'images/answer.png' %}"
+          alt=""
+          style="width: 220px"
+        />
+      </div>
+      <h2 class="question-title">Frequently Asked Questions</h2>
+      <p class="question-description">
+        Sed eu sapien nec diam venenatis fringilla id vitae erat. Sed tincidunt,
+        metus sed sodales iaculis, mauris odio
+      </p>
+    </div>
+
+    <div class="container py-5">
+      <div class="row align-items-center">
+        <!-- Accordion Section -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="accordion" id="faqAccordion">
+            <!-- Item 1 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  How i will get to know about the result
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse show"
+                aria-labelledby="headingOne"
+                data-bs-parent="#faqAccordion"
+              >
+                <div class="accordion-body">
+                  The results of each course will be available on our website
+                  also the candidate/ company will be informed via email about
+                  the result once declared.
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  How we can see our certificates online
+                </button>
+              </h2>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#faqAccordion"
+              >
+                <div class="accordion-body">
+                  Each certificate has its own unique certification number,
+                  through which you can verify the certificate in our online
+                  verification portal
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  How long it will take to Get certificate
+                </button>
+              </h2>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#faqAccordion"
+              >
+                <div class="accordion-body">
+                  every certificate has its own duration and may take from 1 day
+                  to 3 month or more depending upon the type of certification
+                  and procedure of issuing body
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour"
+                  aria-expanded="false"
+                  aria-controls="collapseFour"
+                >
+                  How i can Enroll in the Training Course
+                </button>
+              </h2>
+              <div
+                id="collapseFour"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingFour"
+                data-bs-parent="#faqAccordion"
+              >
+                <div class="accordion-body">
+                  One can submit the request to enroll in the upcoming training
+                  course directly by filling out the online admission or contact
+                  form.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Section -->
+        <div class="col-lg-6">
+          <img
+            src="{% static 'images/faq-image.jpg' %}"
+            alt="Engineers looking at map"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </div>
+
+    <section class="contact-section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <img
+            src="{% static 'images/contact-heading.png' %}"
+            alt=""
+            style="width: 160px"
+            class="mb-1"
+          />
+          <h2 class="fw-bold">Contact Adeptus Now!</h2>
+          <p class="text-muted">
+            Sed eu sapien nec diam venenatis fringilla id vitae erat. Sed
+            tincidunt, metus sed sodales iaculis, mauris odio
+          </p>
+        </div>
+
+        <div class="row contact-container mx-auto" style="width: 88%">
+          <div class="col-md-5 contact-left">
+            <h3>Contact Information</h3>
+            <div class="contact-item mt-5">
+              <i class="bi bi-geo-alt-fill"></i>
+              <div>
+                <strong>Address</strong><br />
+                Office 607, 7172 Ibn Sulaiman<br />
+                Commercial Center, Office's Tower,<br />
+                Riyadh 12633, Saudi Arabia
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="bi bi-telephone-fill"></i>
+              <div>
+                <strong>Phone Number</strong><br />
+                +966 50 126 4259
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="bi bi-envelope-fill"></i>
+              <div>
+                <strong>Email</strong><br />
+                info@adeptuscertifications.co.uk
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-7 contact-right">
+            <h4 class="mb-4 fw-bold">Fill The Form & Contact Us</h4>
+            <div class="alert">Invalid certificate number</div>
+            <form>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    placeholder="Enter First Name"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    placeholder="Enter Last Name"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Enter Email Address"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone"
+                    placeholder="Enter Phone Number"
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="message" class="form-label">Your Message</label>
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    style="height: 120px"
+                    placeholder="Write your message here..."
+                  ></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5 bg-white blog-section">
+      <div class="container text-center">
+        <img
+          src="{% static 'images/blog-heading.png' %}"
+          alt=""
+          style="width: 150px"
+          class="mb-1"
+        />
+        <h2 class="fw-bold mb-2">Latest News & Articles</h2>
+        <p class="text-muted">
+          Latest News , Informative blogs , upcoming events and lot more for
+          Adeptus Certification
+        </p>
+
+        <div class="row mt-5 g-4">
+          <!-- Blog Card 1 -->
+          <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 rounded-4 p-2">
+              <img
+                src="{% static 'images/offers' %}"
+                class="card-img-top rounded-top-4"
+                alt="Blog 1"
+              />
+              <div class="card-body text-start">
+                <div class="d-flex align-items-center mb-2 text-muted small">
+                  <span class="me-1">—</span>
+                  <span class="me-2">By Adeptus</span>
+                  <strong class="me-2">Oct 26, 2020</strong>
+                </div>
+                <h5 class="card-title fw-bold mb-0">Education Programs</h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blog Card 2 -->
+          <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 rounded-4 p-2">
+              <img
+                src="{% static 'images/training' %}"
+                class="card-img-top rounded-top-4"
+                alt="Blog 2"
+              />
+              <div class="card-body text-start">
+                <div class="d-flex align-items-center mb-2 text-muted small">
+                  <span class="me-1">—</span>
+                  <span class="me-2">By Adeptus</span>
+                  <strong class="me-2">Oct 26, 2020</strong>
+                </div>
+                <h5 class="card-title fw-bold mb-0">
+                  Benefits of Combined Study
+                </h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blog Card 3 -->
+          <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 rounded-4 p-2">
+              <img
+                src="{% static 'images/certification' %}"
+                class="card-img-top rounded-top-4"
+                alt="Blog 3"
+              />
+              <div class="card-body text-start">
+                <div class="d-flex align-items-center mb-2 text-muted small">
+                  <span class="me-1">—</span>
+                  <span class="me-2">By Adeptus</span>
+                  <strong class="me-2">Mar 27, 2022</strong>
+                </div>
+                <h5 class="card-title fw-bold mb-0">
+                  Importance of Professional cer...
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- Footer Top Section -->
+<div class="footer-top position-relative text-white px-4 mx-auto" style="background-color: #3aa7b4; border-top-left-radius: 15px; border-top-right-radius: 15px;padding: 30px 0;margin-bottom: -50px;background-image: url('{% static "images/bg-consult" %}');">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-9">
+        <h2 class="fw-bold mb-2">Get Free Consultation Now !</h2>
+        <p class="mb-0">It is a long established fact that a reader will be distracted the readable content of a page</p>
+      </div>
+      <div class="col-md-3 text-md-end mt-3 mt-md-0">
+        <a href="#" class="btn btn-dark px-4 py-2 d-inline-flex align-items-center" style="border-radius: 10px;">
+          Contact us Now!
+          <img src="https://via.placeholder.com/20" alt="" class="ms-2">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Footer Main Section -->
+    <footer class="footer-main" style="padding-top: 120px">
+      <div class="container">
+        <div class="row">
+          <!-- Logo & Button -->
+          <div class="col-md-3">
+            <div class="footer-logo">
+              <img
+                src="{% static 'images/adp.png' %}"
+                alt=""
+                class="mb-2"
+              />
+            </div>
+            <p>Default description</p>
+            <button class="btn btn-contact mt-1">
+              Contact us Now! <span>&#8599;</span>
+            </button>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="col-md-3">
+            <h5>Quick Links</h5>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Courses</a>
+            <a href="#">Blogs</a>
+            <a href="#">Upcoming Courses</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Approvals and Accreditation</a>
+          </div>
+
+          <!-- Our Services -->
+          <div class="col-md-3">
+            <h5>Our Services</h5>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Courses</a>
+            <a href="#">Blogs</a>
+            <a href="#">Upcoming Courses</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Approvals and Accreditation</a>
+          </div>
+
+          <!-- Our Gallery -->
+          <div class="col-md-3">
+            <h5>Our Gallery</h5>
+            <div class="footer-gallery d-flex flex-wrap">
+              <img src="https://via.placeholder.com/40" alt="" />
+              <img src="https://via.placeholder.com/40" alt="" />
+              <img src="https://via.placeholder.com/40" alt="" />
+              <img src="https://via.placeholder.com/40" alt="" />
+              <img src="https://via.placeholder.com/40" alt="" />
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom py-3">
+      © 2025 Adeptus Certifications. All rights reserved.
+    </div>
+
+    <style>
+      .custom-table {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.custom-table th,
+.custom-table td {
+  border-bottom: 1px solid #000000;
+  padding: 5px 10px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.custom-table tr:nth-child(odd) {
+  background-color: #f3f3f3;
+}
+
+
+
+.custom-table th {
+  /* background-color: #f1f1f1; */
+  /* width: 200px; */
+  border-right: none !important;
+}
+
+/* Remove vertical border between th and td */
+.no-middle-border th,
+.no-middle-border td {
+  border-right: none !important;
+}
+
+/* Header Box */
+.heading-box {
+  background-color: #8cc63f;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid black;
+  
+}
+
+/* Wrap for training/equipment */
+.certificate-box {
+  border: 1px solid #000000;
+  width: 70%;
+  margin: 0 auto 20px auto;
+  border-top: none;
+  margin-top: 20px;
+}
+
+/* Lifting Table */
+.custom-lifting-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin-top: 10px;
+}
+
+.custom-lifting-table th,
+.custom-lifting-table td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: center;
+}
+
+.custom-lifting-table th {
+  background-color: #ffffff;
+}
+
+ 
+
+    </style>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+    
+    <!-- <script>
+  $('#verify-form').on('submit', function(e) {
+    e.preventDefault();
+
+    const certType = $('#certificate-type-select').val();
+    const certNumber = $('input[name="certificate_number"]').val();
+
+    $.ajax({
+      url: "{% url 'verify_certificate' %}",
+      method: "GET",
+      data: { certificate_number: certNumber },
+      headers: { "X-Requested-With": "XMLHttpRequest" },
+      success: function(response) {
+
+        $('#alert-container').hide();
+        function safe(val) {
+          return val === null || val === undefined ? '' : val;
+        }
+
+        const cert = response.certificate;
+        let html = `
+          <div class="alert alert-info" style="width: 100%; margin: 0 auto;">
+            In response to the query, we found the following result.
+          </div>
+        `;
+
+        if (certType === 'training' || certType === 'equipment') {
+          html += `
+            <div class="certificate-box">
+              <div class="heading-box">Found Result for the Request.</div>
+              <table class="custom-table no-middle-border">
+          `;
+
+          if (certType === 'training') {
+            html += `
+              <tr><th>Name</th><td>${safe(cert.name)}</td></tr>
+              <tr><th>Registration Number</th><td>${safe(cert.registration_number)}</td></tr>
+              <tr><th>Card Number</th><td>${safe(cert.card_number)}</td></tr>
+              <tr><th>Certificate Number</th><td>${safe(cert.certificate_number)}</td></tr>
+              <tr><th>Course</th><td>${safe(cert.course)}</td></tr>
+              <tr><th>Issue Date</th><td>${safe(cert.issue_date)}</td></tr>
+              <tr><th>Renewal Date</th><td>${safe(cert.renewal_date)}</td></tr>
+            `;
+          } else {
+            html += `
+              <tr><th>Name</th><td>${safe(cert.name)}</td></tr>
+              <tr><th>Certificate Number</th><td>${safe(cert.certificate_number)}</td></tr>
+              <tr><th>Sticker No</th><td>${safe(cert.sticker_no)}</td></tr>
+              <tr><th>Equipment ID</th><td>${safe(cert.equipment_id)}</td></tr>
+              <tr><th>Inspection Date</th><td>${safe(cert.inspection_date)}</td></tr>
+              <tr><th>Next Inspection Date</th><td>${safe(cert.next_inspection_date)}</td></tr>
+              <tr><th>Location</th><td>${safe(cert.location)}</td></tr>
+              <tr><th>Comments</th><td>${safe(cert.comments)}</td></tr>
+            `;
+          }
+
+          html += `</table></div>`;
+        } else if (certType === 'lifting') {
+  // Prepare all fields in an array for easy checking
+  const liftingFields = [
+    cert.item_name,
+    cert.lifting_inspection_date,
+    cert.lifting_next_inspection,
+    cert.serial_no,
+    cert.manufacturer,
+    cert.length,
+    cert.swl,
+    cert.standard_ref,
+    cert.lifting_remarks,
+    cert.inspector
+  ];
+
+  // Check if at least one field is non-empty (not null/undefined/empty string)
+  const hasData = liftingFields.some(field => field !== null && field !== undefined && field.toString().trim() !== '');
+
+  html += `
+    <div style="width: 100%; margin: 0 auto;">
+      <table class="custom-lifting-table">
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Date of Inspection</th>
+            <th>Date of Next Inspection</th>
+            <th>Serial No.</th>
+            <th>Manufacturer</th>
+            <th>Length</th>
+            <th>SWL</th>
+            <th>Standard Ref.</th>
+            <th>Remarks</th>
+            <th>Inspector</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  if (hasData) {
+    html += `
+      <tr>
+        <td>${safe(cert.item_name)}</td>
+        <td>${safe(cert.lifting_inspection_date)}</td>
+        <td>${safe(cert.lifting_next_inspection)}</td>
+        <td>${safe(cert.serial_no)}</td>
+        <td>${safe(cert.manufacturer)}</td>
+        <td>${safe(cert.length)}</td>
+        <td>${safe(cert.swl)}</td>
+        <td>${safe(cert.standard_ref)}</td>
+        <td>${safe(cert.lifting_remarks)}</td>
+        <td>${safe(cert.inspector)}</td>
+      </tr>
+    `;
+  } 
+  // else no row added, only headers shown
+
+  html += `
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+        $('#result-box').html(html);
+      },
+      error: function(xhr) {
+        const error = xhr.responseJSON?.error || 'An unknown error occurred';
+        $('#result-box').html(`<div class="alert alert-danger">${error}</div>`);
+      }
+    });
+  });
+</script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
